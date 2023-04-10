@@ -21,93 +21,97 @@ class _home_pageState extends State<home_page> {
     }
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            // Top Header
-            const Material(
-              elevation: 10,
-              child: Padding(
-                padding: EdgeInsets.only(
-                    left: 150.0, top: 15, right: 50, bottom: 15),
-                child: HeaderWidget(),
+        child: Container(
+          color: Color.fromARGB(255, 251, 238, 193),
+          child: Column(
+            children: <Widget>[
+              // Top Header
+              const Material(
+                elevation: 10,
+                color: Color.fromARGB(255, 101, 157, 189),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: 150.0, top: 15, right: 50, bottom: 15),
+                  child: HeaderWidget(),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 150.0, top: 0, right: 150),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  const LeftDescription(),
-                  Center(
-                    child: Container(
-                      width: 800,
-                      height: 700,
-                      child: Image.asset(
-                        'assets/land_image.jpg',
-                        fit: BoxFit.contain,
-                        height: 20.0,
-                        width: 20.0,
+              Padding(
+                padding: const EdgeInsets.only(left: 150.0, top: 0, right: 150),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    const LeftDescription(),
+                    Center(
+                      child: Container(
+                        width: 800,
+                        height: 700,
+                        child: Image.asset(
+                          'assets/land_image.jpg',
+                          fit: BoxFit.contain,
+                          height: 20.0,
+                          width: 20.0,
+                        ),
+                        // SvgPicture.asset(
+                        //   'assets/background_svg.svg',
+                        //   height: 20.0,
+                        //   width: 20.0,
+                        //   allowDrawingOutsideViewBox: true,
+                        // ),
                       ),
-                      // SvgPicture.asset(
-                      //   'assets/background_svg.svg',
-                      //   height: 20.0,
-                      //   width: 20.0,
-                      //   allowDrawingOutsideViewBox: true,
-                      // ),
-                    ),
-                  )
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomAnimatedContainer('Contract Owner', () {
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const CheckPrivateKey(
+                    //               val: "owner",
+                    //             )));
+                    Navigator.of(context).pushNamed(
+                      '/login',
+                      arguments: "owner",
+                    );
+                  }),
+                  CustomAnimatedContainer('Land Inspector', () {
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const CheckPrivateKey(
+                    //               val: "LandInspector",
+                    //             )));
+                    Navigator.of(context).pushNamed(
+                      '/login',
+                      arguments: "LandInspector",
+                    );
+                  }),
+                  CustomAnimatedContainer('User', () {
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const CheckPrivateKey(
+                    //               val: "UserLogin",
+                    //             )));
+                    Navigator.of(context).pushNamed(
+                      '/login',
+                      arguments: "UserLogin",
+                    );
+                  }),
                 ],
               ),
-            ),
-            const SizedBox(
-              height: 100,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomAnimatedContainer('Contract Owner', () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const CheckPrivateKey(
-                  //               val: "owner",
-                  //             )));
-                  Navigator.of(context).pushNamed(
-                    '/login',
-                    arguments: "owner",
-                  );
-                }),
-                CustomAnimatedContainer('Land Inspector', () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const CheckPrivateKey(
-                  //               val: "LandInspector",
-                  //             )));
-                  Navigator.of(context).pushNamed(
-                    '/login',
-                    arguments: "LandInspector",
-                  );
-                }),
-                CustomAnimatedContainer('User', () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const CheckPrivateKey(
-                  //               val: "UserLogin",
-                  //             )));
-                  Navigator.of(context).pushNamed(
-                    '/login',
-                    arguments: "UserLogin",
-                  );
-                }),
-              ],
-            ),
-            const SizedBox(
-              height: 100,
-            ),
-          ],
+              const SizedBox(
+                height: 100,
+              ),
+            ],
+          ),
         ),
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.

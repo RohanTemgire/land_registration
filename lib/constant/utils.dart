@@ -152,7 +152,7 @@ Widget CustomAnimatedContainer(text, fun) => Padding(
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
-                    'assets/contract_owner_icon.jpg',
+                    'assets/c_owner_icon.png',
                     width: 110.0,
                     height: 110.0,
                     fit: BoxFit.fill,
@@ -162,7 +162,7 @@ Widget CustomAnimatedContainer(text, fun) => Padding(
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
-                    'assets/land_ins_icon.jpg',
+                    'assets/inspector_icon.png',
                     width: 110.0,
                     height: 110.0,
                     fit: BoxFit.fill,
@@ -203,7 +203,7 @@ Widget CustomAnimatedContainer(text, fun) => Padding(
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
-                    'assets/contract_owner_icon.jpg',
+                    'assets/c_owner_icon.png',
                     width: 110.0,
                     height: 110.0,
                     fit: BoxFit.fill,
@@ -213,7 +213,7 @@ Widget CustomAnimatedContainer(text, fun) => Padding(
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
-                    'assets/land_ins_icon.jpg',
+                    'assets/inspector_icon.png',
                     width: 110.0,
                     height: 110.0,
                     fit: BoxFit.fill,

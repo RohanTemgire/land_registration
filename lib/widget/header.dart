@@ -20,7 +20,7 @@ class HeaderWidget extends StatelessWidget {
         // logo
         const Text(
           'Land Registration using Blockchain',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          style: TextStyle(fontFamily: 'Roboto',fontWeight: FontWeight.bold, fontSize: 20),
         ),
 
         Row(

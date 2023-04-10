@@ -23,11 +23,9 @@ class LeftDescription extends StatelessWidget {
 Registration Using
 Blockchain''',
               style: TextStyle(
-                fontFamily: 'Poppins',
+                fontFamily: 'Anton-Regular',
                 color: Color(0xff28313b),
                 fontSize: 50,
-                fontWeight: FontWeight.w400,
-                fontStyle: FontStyle.normal,
                 //letterSpacing: 1.5,
               )),
         ),
