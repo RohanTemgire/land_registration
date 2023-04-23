@@ -58,7 +58,7 @@ class _LandInspectorState extends State<LandInspector> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text("LandInspector Dashboard"),
+        title: const Text("Land Inspector Dashboard"),
         centerTitle: true,
         backgroundColor: const Color(0xFF272D34),
         leading: isDesktop
@@ -211,6 +211,13 @@ class _LandInspectorState extends State<LandInspector> {
                   ),
                   Expanded(
                     child: Center(
+                      child: Text('Reject',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                    flex: 2,
+                  ),
+                  Expanded(
+                    child: Center(
                       child: Text('Verify',
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
@@ -268,8 +275,32 @@ class _LandInspectorState extends State<LandInspector> {
                   flex: 2),
               Expanded(
                   child: Center(
-                    child: data[10]
-                        ? const Text('Verified')
+                    child: (data[10][0] == true && data[10][1] == false)? const Text("-") :
+                      (data[10][0] == true && data[10][1] == true)
+                        ? const Text('Rejected')
+                        : ElevatedButton(
+                            onPressed: () async {
+                              SmartDialog.showLoading();
+                              try {
+                                if (connectedWithMetamask) {
+                                  await model2.verifyLand(data[0]);
+                                } else {
+                                  await model.verifyLand(data[0]);
+                                }
+                                await getLandList();
+                              } catch (e) {
+                                print(e);
+                              }
+                              SmartDialog.dismiss();
+                            },
+                            child: const Text('Reject')),
+                  ),
+                  flex: 2),
+              Expanded(
+                  child: Center(
+                    child: (data[10][0] == true && data[10][1] == false)? const Text("Verified") :
+                    (data[10][0] == true && data[10][1] == true)
+                        ? const Text('-')
                         : ElevatedButton(
                             onPressed: () async {
                               SmartDialog.showLoading();

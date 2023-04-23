@@ -190,6 +190,26 @@ class _viewLandDetailsState extends State<viewLandDetails> {
                     ]),
                     TableRow(children: [
                       const Text(
+                        "Price per Square Feet : ",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      Text(
+                          (int.parse(widget.landinfo.landPrice) /
+                                  int.parse(widget.landinfo.area))
+                              .toStringAsFixed(0),
+                          style: const TextStyle(fontSize: 20))
+                    ]),
+                    const TableRow(children: [
+                      SizedBox(
+                        height: 15,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                    ]),
+                    TableRow(children: [
+                      const Text(
                         "Survey Number : ",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20),

@@ -36,6 +36,8 @@ class LandRegisterModel extends ChangeNotifier {
   late ContractFunction _allUsers;
   late ContractFunction _userInfo;
   late ContractFunction _verifyUser;
+  late ContractFunction _rejectUser;
+  late ContractFunction _rejectLand;
   late ContractFunction _userCount;
   late ContractFunction _DocumentId;
   late ContractFunction _addLand;
@@ -109,6 +111,8 @@ class LandRegisterModel extends ChangeNotifier {
     _allUsers = _contract.function("ReturnAllUserList");
     _userInfo = _contract.function("UserMapping");
     _verifyUser = _contract.function("verifyUser");
+    _rejectUser = _contract.function("rejectUser");
+    _rejectLand = _contract.function("rejectLand");
     _userCount = _contract.function("userCount");
     _DocumentId = _contract.function("documentId");
     _addLand = _contract.function("addLand");
@@ -359,6 +363,19 @@ class LandRegisterModel extends ChangeNotifier {
         chainId: _chainId,
         fetchChainIdFromNetworkId: false);
   }
+  rejectLand(dynamic id) async {
+    notifyListeners();
+    await _client.sendTransaction(
+        _credentials,
+        Transaction.callContract(
+            contract: _contract,
+            function: _rejectLand,
+            parameters: [
+              id,
+            ]),
+        chainId: _chainId,
+        fetchChainIdFromNetworkId: false);
+  }
 
   Future<List<dynamic>> allLandList() async {
     final val = await _client.call(
@@ -446,6 +463,19 @@ class LandRegisterModel extends ChangeNotifier {
         Transaction.callContract(
             contract: _contract,
             function: _verifyUser,
+            parameters: [
+              EthereumAddress.fromHex(address),
+            ]),
+        chainId: _chainId,
+        fetchChainIdFromNetworkId: false);
+  }
+  rejectUser(String address) async {
+    notifyListeners();
+    await _client.sendTransaction(
+        _credentials,
+        Transaction.callContract(
+            contract: _contract,
+            function: _rejectUser,
             parameters: [
               EthereumAddress.fromHex(address),
             ]),

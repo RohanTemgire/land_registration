@@ -19,7 +19,8 @@ contract Land {
         string document;
         bool isforSell;
         address payable ownerAddress;
-        bool isLandVerified;
+        bool[2] isLandVerified;
+        // bool isRejected;
     }
 
     struct User{
@@ -31,7 +32,8 @@ contract Land {
         string panNumber;
         string document;
         string email;
-        bool isUserVerified;
+        bool[2] isUserVerified;
+        // bool isRejected;
     }
 
     struct LandInspector {
@@ -155,20 +157,25 @@ contract Land {
         userCount++;
         allUsersList[1].push(msg.sender);
         AllUsers[userCount]=msg.sender;
-        UserMapping[msg.sender] = User(msg.sender, _name, _age, _city,_aadharNumber,_panNumber, _document,_email,false);
+        UserMapping[msg.sender] = User(msg.sender, _name, _age, _city,_aadharNumber,_panNumber, _document,_email,[false,false]);
         //emit Registration(msg.sender);
     }
 
     function verifyUser(address _userId) public{
         require(isLandInspector(msg.sender));
-        UserMapping[_userId].isUserVerified=true;
+        UserMapping[_userId].isUserVerified[0]=true;
     }
     function isUserVerified(address id) public view returns(bool){
-        return UserMapping[id].isUserVerified;
+        return UserMapping[id].isUserVerified[0];
     }
     function ReturnAllUserList() public view returns(address[] memory)
     {
         return allUsersList[1];
+    }
+    function rejectUser(address _userId) public{
+        require(isLandInspector(msg.sender));
+        UserMapping[_userId].isUserVerified[0]=true;
+        UserMapping[_userId].isUserVerified[1]=true;
     }
 
 
@@ -176,7 +183,7 @@ contract Land {
     function addLand(uint _area, string memory _address, uint landPrice,string memory _allLatiLongi, uint _propertyPID,string memory _surveyNum, string memory _document) public {
         require(isUserVerified(msg.sender));
         landsCount++;
-        lands[landsCount] = Landreg(landsCount, _area, _address, landPrice,_allLatiLongi,_propertyPID, _surveyNum , _document,false,msg.sender,false);
+        lands[landsCount] = Landreg(landsCount, _area, _address, landPrice,_allLatiLongi,_propertyPID, _surveyNum , _document,false,msg.sender,[false,false]);
         MyLands[msg.sender].push(landsCount);
         allLandList[1].push(landsCount);
         // emit AddingLand(landsCount);
@@ -189,10 +196,15 @@ contract Land {
 
     function verifyLand(uint _id) public{
         require(isLandInspector(msg.sender));
-        lands[_id].isLandVerified=true;
+        lands[_id].isLandVerified[0]=true;
     }
     function isLandVerified(uint id) public view returns(bool){
-        return lands[id].isLandVerified;
+        return lands[id].isLandVerified[0];
+    }
+    function rejectLand(uint _id) public{
+        require(isLandInspector(msg.sender));
+        lands[_id].isLandVerified[0]=true;
+        lands[_id].isLandVerified[1]=true;
     }
 
     function myAllLands(address id) public view returns( uint[] memory){

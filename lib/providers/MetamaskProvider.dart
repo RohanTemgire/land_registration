@@ -32,10 +32,10 @@ class MetaMaskProvider extends ChangeNotifier {
     "function ReturnAllUserList() public view returns(address[] memory)",
     "function isUserRegistered(address _addr) public view returns(bool)",
     "function makePaymentTestFun(address payable _reveiver) public payable",
-    "function UserMapping(address) public view returns(address id,string name,uint age,string city,string aadharNumber,string panNumber,string document,string email,bool isUserVerified)",
+    "function UserMapping(address) public view returns(address id,string name,uint age,string city,string aadharNumber,string panNumber,string document,string email,bool[] isUserVerified)",
     "function addLand(uint _area, string memory _address, uint landPrice,string memory _allLatiLongi, uint _propertyPID,string memory _surveyNum, string memory _document) public",
     "function myAllLands(address id) public view returns( uint[] memory)",
-    "function lands(uint) public view returns(uint id,uint area,string landAddress,uint landPrice,string allLatitudeLongitude,uint propertyPID,string physicalSurveyNumber,string document,bool isforSell,address payable ownerAddress,bool isLandVerified)",
+    "function lands(uint) public view returns(uint id,uint area,string landAddress,uint landPrice,string allLatitudeLongitude,uint propertyPID,string physicalSurveyNumber,string document,bool isforSell,address payable ownerAddress,bool[] isLandVerified)",
     "function ReturnAllLandList() public view returns(uint[] memory)",
     "function makeItforSell(uint id) public",
     "function requestforBuy(uint _landId) public",
@@ -60,7 +60,9 @@ class MetaMaskProvider extends ChangeNotifier {
     "function changeContractOwner(address _addr)public",
     "function ReturnAllLandIncpectorList() public view returns(address[] memory)",
     "function removeLandInspector(address _addr) public",
-    "function InspectorMapping(address) public view returns(uint id,address _addr,string name,uint age,string designation,string city)"
+    "function InspectorMapping(address) public view returns(uint id,address _addr,string name,uint age,string designation,string city)",
+    "function rejectUser(address _userId) public",
+    "function rejectLand(uint _id) public"
   ];
 
   Future<void> connect() async {
@@ -290,9 +292,16 @@ class MetaMaskProvider extends ChangeNotifier {
   verifyUser(String address) async {
     await writeFunctionCall('verifyUser', [address]);
   }
+  rejectUser(String address) async {
+    await writeFunctionCall('rejectUser', [address]);
+  }
 
   verifyLand(dynamic id) async {
     await writeFunctionCall('verifyLand', [id.toString()]);
+  }
+
+  rejectLand(dynamic id) async {
+    await writeFunctionCall('rejectLand', [id.toString()]);
   }
 
   Future<List<dynamic>> allUsers() async {

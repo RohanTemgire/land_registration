@@ -30,7 +30,8 @@ class _UserDashBoardState extends State<UserDashBoard> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int screen = 0;
   late List<dynamic> userInfo;
-  bool isLoading = true, isUserVerified = false;
+  bool isLoading = true;
+  List<bool> isUserVerified = [false, false];
   bool isUpdated = true;
   List<List<dynamic>> LandGall = [];
   String name = "";
@@ -187,7 +188,7 @@ class _UserDashBoardState extends State<UserDashBoard> {
         isLoading = false;
       });
     }
-   // screen = 3;
+    // screen = 3;
     isLoading = false;
     setState(() {});
   }
@@ -224,7 +225,7 @@ class _UserDashBoardState extends State<UserDashBoard> {
       setState(() {});
     }
 
-   // screen = 5;
+    // screen = 5;
     isLoading = false;
 
     // SmartDialog.dismiss();
@@ -255,7 +256,7 @@ class _UserDashBoardState extends State<UserDashBoard> {
       setState(() {});
     }
     isLoading = false;
-  //  screen = 4;
+    //  screen = 4;
     setState(() {});
   }
 
@@ -384,8 +385,7 @@ class _UserDashBoardState extends State<UserDashBoard> {
     );
   }
 
-Widget sentRequest() {
-   
+  Widget sentRequest() {
     return ListView.builder(
       itemCount: sentRequestInfo == null ? 1 : sentRequestInfo.length + 1,
       itemBuilder: (BuildContext context, int index) {
@@ -512,7 +512,6 @@ Widget sentRequest() {
   }
 
   Widget receivedRequest() {
-    
     return ListView.builder(
       itemCount:
           receivedRequestInfo == null ? 1 : receivedRequestInfo.length + 1,
@@ -665,7 +664,6 @@ Widget sentRequest() {
     );
   }
 
-
   Widget landGallery() {
     if (isLoading) {
       return const Expanded(child: Center(child: CircularProgressIndicator()));
@@ -700,7 +698,7 @@ Widget sentRequest() {
                   LandGall[index][3].toString(),
                   LandGall[index][9] == userInfo[0],
                   LandGall[index][8], () async {
-                if (isUserVerified) {
+                if (isUserVerified[0]) {
                   SmartDialog.showLoading();
                   try {
                     if (connectedWithMetamask) {
@@ -1006,7 +1004,7 @@ Widget sentRequest() {
               ),
               CustomButton(
                   'Add',
-                  isLoading || !isUserVerified
+                  isLoading || !isUserVerified[0]
                       ? null
                       : () async {
                           if (_formKey.currentState!.validate() &&
@@ -1059,7 +1057,7 @@ Widget sentRequest() {
 
                           //model.makePaymentTestFun();
                         }),
-              if (!isUserVerified)
+              if (!isUserVerified[0])
                 const Text('You are not verified',
                     style: TextStyle(color: Colors.redAccent)),
               isLoading ? spinkitLoader : Container()
@@ -1074,7 +1072,7 @@ Widget sentRequest() {
     if (isLoading) {
       return const Expanded(child: Center(child: CircularProgressIndicator()));
     }
-    isUserVerified = userInfo[8];
+    isUserVerified[0] = userInfo[8];
     return Expanded(
       child: Center(
         child: Container(
